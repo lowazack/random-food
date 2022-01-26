@@ -4,16 +4,20 @@ import {faBriefcaseMedical, faPlateUtensils, faPanFood} from "@fortawesome/pro-t
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import GridSelector from "./GridSelector";
 import intolerances from "../json/intolerances";
+import diets from "../json/diets";
 
 
 export default function SiteHero() {
 
     const [imageCount, setImageCount] = useState(1);
     const [activeImage, setActiveImage] = useState(null);
+    const [activeIntolerances, setActiveIntolerances] = useState([]);
+    const [activeDiets, setActiveDiets] = useState([]);
+
     const imageRef = useRef();
     const bgContainerRef = useRef();
     const intolerancesRef = useRef();
-    const [activeIntolerances, setActiveIntolerances] = useState([])
+    const dietsRef = useRef();
 
 
 
@@ -55,20 +59,38 @@ export default function SiteHero() {
     const openIntolerancesSelector = function (){
         intolerancesRef.current.openModal()
     }
+    const openDietsSelector = function (){
+        dietsRef.current.openModal()
+    }
 
-    const intoleranceCallback = function (name) {
-        console.log(name)
+    const intoleranceCallback = function (id) {
         let tempActiveIntolerances = activeIntolerances;
-        if (activeIntolerances.includes(name)){
+        if (activeIntolerances.includes(id)){
             tempActiveIntolerances.splice(
-                activeIntolerances.indexOf(name),
+                activeIntolerances.indexOf(id),
                 1
             )
         }
         else {
-            tempActiveIntolerances.push(name)
+            tempActiveIntolerances.push(id)
         }
+
+        intolerancesRef.current.setActiveIds(tempActiveIntolerances)
         setActiveIntolerances(tempActiveIntolerances)
+    }
+    const dietsCallback = function (ids) {
+        let tempActiveDiets = activeDiets;
+
+        if (activeDiets.includes(ids)){
+            tempActiveDiets.splice(
+                activeDiets.indexOf(ids), 1);
+        }
+        else {
+            tempActiveDiets.push(ids)
+        }
+
+        dietsRef.current.setActiveIds(tempActiveDiets)
+        setActiveDiets(tempActiveDiets)
     }
 
     return (
@@ -77,7 +99,13 @@ export default function SiteHero() {
                 options={intolerances}
                 ref={intolerancesRef}
                 callback={intoleranceCallback}
-                activeNames={activeIntolerances}
+                initialIds={activeIntolerances}
+            />
+            <GridSelector
+                options={diets}
+                ref={dietsRef}
+                callback={dietsCallback}
+                initialIds={activeIntolerances}
             />
             <div className={classes.searchHero}>
                 <div className={classes.searchHeroBgContainer} ref={bgContainerRef}>
@@ -101,7 +129,7 @@ export default function SiteHero() {
                             <span>Allergy <br/>Information</span>
                         </button>
 
-                        <button className={classes.selectorButton}>
+                        <button className={classes.selectorButton} onClick={() => {openDietsSelector()}}>
                             <FontAwesomeIcon icon={faPlateUtensils}/>
                             <span>Diet <br/>Information</span>
                         </button>

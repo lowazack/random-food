@@ -1,16 +1,20 @@
 import classes from '../styles/components/GridSelector.module.scss'
 import {faTimes} from "@fortawesome/pro-thin-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useImperativeHandle, forwardRef, useState} from "react";
+import {useImperativeHandle, forwardRef, useState, useEffect} from "react";
 
-const GridSelector = function ({options, callback, activeNames}, ref) {
+const GridSelector = function ({options, callback}, ref) {
 
     const [isOpen, setIsOpen] = useState(false)
+    const [activeIds, setActiveIds] = useState([])
 
     useImperativeHandle(ref, () => ({
         openModal() {
             setIsOpen(true);
             document.body.style.overflow = 'hidden';
+        },
+        setActiveIds(ids){
+            setActiveIds(ids)
         }
     }), [])
 
@@ -26,9 +30,9 @@ const GridSelector = function ({options, callback, activeNames}, ref) {
                     <div className={classes.gridContainer}>
                         {options.map((option, key) => (
                             <button
-                                className={activeNames.includes(option.name)? classes.gridButtonActive: classes.gridButton}
+                                className={activeIds.includes(option.id)? classes.gridButtonActive: classes.gridButton}
                                 key={key}
-                                onClick={() => {callback(option.name)}}
+                                onClick={() => {callback(option.id)}}
                             >
                                 <FontAwesomeIcon icon={option.icon}/>
                                 <span>
