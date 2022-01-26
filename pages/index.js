@@ -3,9 +3,9 @@ import SearchHero from "../components/SearchHero";
 export default function Home() {
 
     return (
-        <>
+        <div className={styles.home}>
             <SearchHero />
-        </>
+        </div>
     )
 }
 

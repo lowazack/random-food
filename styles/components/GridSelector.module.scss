@@ -1,0 +1,67 @@
+@import "../vars";
+.gridSelector {
+  position: fixed;
+  background-color: #00000059;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+}
+
+.gridContainer {
+  max-width: 900px;
+  width: 100%;
+  padding: 30px;
+  grid-gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.gridButton {
+  background-color: white;
+  width: 150px;
+  border: none;
+  border-radius: 20px;
+  height: 200px;
+  box-shadow: 5px 5px 10px 0px #00000012;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+
+  svg {
+    width: 60px;
+    margin-bottom: 10px;
+  }
+}
+
+.gridButtonActive {
+  @extend .gridButton;
+  background-color: $primary;
+  color: white;
+}
+
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  svg {
+    width: 20px;
+  }
+}

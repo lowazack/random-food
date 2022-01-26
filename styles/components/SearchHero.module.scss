@@ -49,36 +49,47 @@
 
 .content {
   width: 100%;
-  padding: 0 40px;
   max-width: 1440px;
   margin: auto;
   position: relative;
+  padding: 0 20px;
+  @media screen and (min-width: 800px) {
+    padding: 0 40px;
+  }
 }
 
 .title {
   font-family: $font-noto;
-  font-size: 4rem;
   color: $primary;
   text-shadow: 2px 2px 2px #ffffff70;
   margin: 0;
+  @media screen and (min-width: 800px) {
+    font-size: 4rem;
+  }
 }
 
 .subtitle {
   font-family: $font-noto;
-  font-size: 2rem;
   color: $primary;
   text-shadow: 2px 2px 2px #ffffff70;
   margin: 0;
   margin-bottom: 30px;
+  @media screen and (min-width: 800px) {
+    font-size: 2rem;
+  }
 }
 
 .selector {
   display: flex;
+  width: 100%;
+  overflow: auto;
+  padding: 10px 0;
 }
 
 .selectorButton {
   background-color: white;
   width: 150px;
+  padding: 0 20px;
   border: none;
   border-radius: 20px;
   height: 200px;
@@ -89,9 +100,15 @@
   justify-content: center;
   margin-right: 20px;
   cursor: pointer;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 
   svg {
     width: 60px;
     margin-bottom: 10px;
+  }
+
+  &:hover {
+    background-color: $secondary;
+    color: white;
   }
 }
